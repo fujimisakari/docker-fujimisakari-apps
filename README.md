@@ -11,6 +11,9 @@ Manage my Applications by docker.
 $ git clone https://github.com/fujimisakari/docker-fujimisakari-apps.git
 $ git submodule init
 $ git submodule update
+
+$ mkdir mysql/log
+$ mkdir -p nginx/log/otherbu
 ```
 
 
