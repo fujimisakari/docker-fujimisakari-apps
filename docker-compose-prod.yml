@@ -20,6 +20,16 @@ fujimi_otherbu_staging:
     - /var/run
   command: uwsgi --ini scripts/otherbu_staging_uwsgi.ini
 
+fujimi_fuel-todo:
+  container_name: "fujimi_fuel-todo"
+  image: fujimi_fuel-todo
+  restart: always
+  env_file: ./fuel-todo/.env
+  volumes:
+    - /var/run/php-fpm
+    - ./fuel-todo:/usr/src/fuel-todo
+    - ./fuel-todo/php-fpm.d:/usr/local/etc/php-fpm.d
+
 fujimi_nginx:
   container_name: "fujimi_nginx"
   image: fujimi_nginx

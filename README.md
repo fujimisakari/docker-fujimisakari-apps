@@ -9,11 +9,18 @@ Manage my Applications by docker.
 
 ```sh
 $ git clone https://github.com/fujimisakari/docker-fujimisakari-apps.git
-$ git submodule init
-$ git submodule update
+$ cd docker-fujimisakari-apps
+
+# otherbu
+$ git clone https://github.com/fujimisakari/otherbu
+
+# fuel-todo
+$ git clone https://github.com/fujimisakari/fuel-todo
+$ ./fuel-todo/composer.phar install
 
 $ mkdir mysql/log
 $ mkdir -p nginx/log/otherbu
+$ mkdir -p nginx/log/fuel-todo
 ```
 
 
@@ -22,6 +29,9 @@ $ mkdir -p nginx/log/otherbu
 ```sh
 $ cd otherbu
 $ docker build . -t fujimi_otherbu
+
+$ cd fuel-todo
+$ docker build . -t fujimi_fuel-todo
 
 $ cd nginx
 $ docker build . -t fujimi_nginx
@@ -34,9 +44,16 @@ $ docker build . -t fujimi_mysql
 ## Initialize Apps
 
 ```sh
-# otherbu
 $ ./docker-compose.sh dev up
+
+# otherbu
 $ docker exec -it fujimi_otherbu_dev ./env/otherbu_init.sh develop
+
+# fuel-todo
+$ docker exec -it fujimi_fuel-todo ./init.sh
+
+# fuel-todo
+$ docker exec -it fujimi_fuel-todo ./init.sh
 let exit docker-compose
 ```
 

@@ -9,9 +9,23 @@ fujimi_otherbu_dev:
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - ./otherbu:/usr/src/otherbu_dev
     - /var/run
+    - ./otherbu:/usr/src/otherbu_dev
   command: uwsgi --ini scripts/otherbu_dev_uwsgi.ini
+
+fujimi_fuel-todo:
+  container_name: "fujimi_fuel-todo"
+  image: fujimi_fuel-todo
+  restart: always
+  env_file: ./fuel-todo/.env
+  links:
+    - fujimi_mysql:db
+    - fujimi_redis:redis
+    - fujimi_memcached:memcached
+  volumes:
+    - /var/run/php-fpm
+    - ./fuel-todo:/usr/src/fuel-todo
+    - ./fuel-todo/php-fpm.d:/usr/local/etc/php-fpm.d
 
 fujimi_nginx:
   container_name: "fujimi_nginx"
@@ -28,6 +42,7 @@ fujimi_nginx:
     - ./nginx/vhosts:/etc/nginx/vhosts
   volumes_from:
     - fujimi_otherbu_dev
+    - fujimi_fuel-todo
 
 fujimi_mysql:
   container_name: "fujimi_mysql"
