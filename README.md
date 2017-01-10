@@ -5,7 +5,7 @@
 Manage my Applications by docker.
 
 
-## Provisioning
+## Setup apps
 
 ```sh
 $ git clone https://github.com/fujimisakari/docker-fujimisakari-apps.git
