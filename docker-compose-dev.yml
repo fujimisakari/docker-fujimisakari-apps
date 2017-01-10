@@ -1,0 +1,71 @@
+fujimi_otherbu_dev:
+  container_name: "fujimi_otherbu_dev"
+  image: fujimi_otherbu
+  restart: always
+  env_file: ./otherbu/.env.develop
+  working_dir: "/usr/src/otherbu_dev"
+  links:
+    - fujimi_mysql:db
+    - fujimi_redis:redis
+    - fujimi_memcached:memcached
+  volumes:
+    - ./otherbu:/usr/src/otherbu_dev
+    - /var/run
+  command: uwsgi --ini scripts/otherbu_dev_uwsgi.ini
+
+fujimi_nginx:
+  container_name: "fujimi_nginx"
+  image: fujimi_nginx
+  restart: always
+  ports:
+    - "80:80"
+    # - "443:443"
+  links:
+    - fujimi_otherbu_dev:otherbu_dev
+  volumes:
+    - ./nginx/log:/var/log/nginx
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./nginx/vhosts:/etc/nginx/vhosts
+  volumes_from:
+    - fujimi_otherbu_dev
+
+fujimi_mysql:
+  container_name: "fujimi_mysql"
+  image: mysql:5.6
+  restart: always
+  ports:
+    - "3306:3306"
+  environment:
+    - TZ=Asia/Tokyo
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  volumes:
+    - ./mysql/log:/var/log/mysql
+    - ./mysql/charset.cnf:/etc/mysql/conf.d/charset.cnf
+  volumes_from:
+    - fujimi_storage
+
+fujimi_redis:
+  container_name: "fujimi_redis"
+  image: redis:latest
+  restart: always
+  ports:
+    - "6379:6379"
+  volumes_from:
+    - fujimi_storage
+  command: redis-server --appendonly yes
+
+fujimi_memcached:
+  container_name: "fujimi_memcached"
+  image: memcached:latest
+  restart: always
+  ports:
+    - '11211:11211'
+  volumes_from:
+    - fujimi_storage
+
+fujimi_storage:
+  container_name: "fujimi_storage"
+  image: busybox:latest
+  volumes:
+    - /var/lib/mysql
+    - /data

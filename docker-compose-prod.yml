@@ -1,0 +1,38 @@
+fujimi_otherbu_prod:
+  container_name: "fujimi_otherbu_prod"
+  image: fujimi_otherbu
+  restart: always
+  env_file: ./otherbu/.env.production
+  working_dir: "/usr/src/otherbu_prod"
+  volumes:
+    - ./otherbu:/usr/src/otherbu_prod
+    - /var/run
+  command: uwsgi --ini scripts/otherbu_prod_uwsgi.ini
+
+fujimi_otherbu_staging:
+  container_name: "fujimi_otherbu_staging"
+  image: fujimi_otherbu
+  restart: always
+  env_file: ./otherbu/.env.staging
+  working_dir: "/usr/src/otherbu_staging"
+  volumes:
+    - ./otherbu:/usr/src/otherbu_staging
+    - /var/run
+  command: uwsgi --ini scripts/otherbu_staging_uwsgi.ini
+
+fujimi_nginx:
+  container_name: "fujimi_nginx"
+  image: fujimi_nginx
+  restart: always
+  ports:
+    - "80:80"
+    # - "443:443"
+  links:
+    - fujimi_otherbu_prod:otherbu_prod
+    - fujimi_otherbu_staging:otherbu_staging
+  volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./nginx/vhosts:/etc/nginx/vhosts
+  volumes_from:
+    - fujimi_otherbu_prod
+    - fujimi_otherbu_staging
