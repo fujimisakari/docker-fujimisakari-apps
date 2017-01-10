@@ -31,7 +31,7 @@ $ docker build . -t fujimi_mysql
 ```
 
 
-## Setup Apps
+## Initialize Apps
 
 ```sh
 # otherbu
