@@ -1,0 +1,3 @@
+[submodule "otherbu"]
+	path = otherbu
+	url = https://github.com/fujimisakari/otherbu.git
