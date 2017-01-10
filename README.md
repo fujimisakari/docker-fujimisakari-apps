@@ -52,8 +52,6 @@ $ docker exec -it fujimi_otherbu_dev ./env/otherbu_init.sh develop
 # fuel-todo
 $ docker exec -it fujimi_fuel-todo ./init.sh
 
-# fuel-todo
-$ docker exec -it fujimi_fuel-todo ./init.sh
 let exit docker-compose
 ```
 
