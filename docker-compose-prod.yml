@@ -7,7 +7,7 @@ fujimi_otherbu_prod:
   volumes:
     - ./otherbu:/usr/src/otherbu_prod
     - /var/run
-  command: uwsgi --ini scripts/otherbu_prod_uwsgi.ini
+  command: uwsgi --ini scripts/prod_uwsgi.ini
 
 fujimi_otherbu_staging:
   container_name: "fujimi_otherbu_staging"
@@ -18,7 +18,7 @@ fujimi_otherbu_staging:
   volumes:
     - ./otherbu:/usr/src/otherbu_staging
     - /var/run
-  command: uwsgi --ini scripts/otherbu_staging_uwsgi.ini
+  command: uwsgi --ini scripts/staging_uwsgi.ini
 
 fujimi_fuel-todo:
   container_name: "fujimi_fuel-todo"

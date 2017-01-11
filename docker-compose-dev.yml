@@ -11,7 +11,7 @@ fujimi_otherbu_dev:
   volumes:
     - /var/run
     - ./otherbu:/usr/src/otherbu_dev
-  command: uwsgi --ini scripts/otherbu_dev_uwsgi.ini
+  command: uwsgi --ini scripts/dev_uwsgi.ini
 
 fujimi_fuel-todo:
   container_name: "fujimi_fuel-todo"
