@@ -4,6 +4,11 @@
 
 Manage my Applications by docker.
 
+- Applications is:
+  - otherbu
+  - fuel-todo
+  - trac
+
 
 ## Setup apps
 
@@ -17,6 +22,9 @@ $ git clone https://github.com/fujimisakari/otherbu
 # fuel-todo
 $ git clone https://github.com/fujimisakari/fuel-todo
 $ ./fuel-todo/composer.phar install
+
+# trac
+$ git clone https://github.com/fujimisakari/trac
 
 $ mkdir mysql/log
 $ mkdir -p nginx/log/otherbu
@@ -32,6 +40,9 @@ $ docker build . -t fujimi_otherbu
 
 $ cd fuel-todo
 $ docker build . -t fujimi_fuel-todo
+
+$ cd trac
+$ docker build . -t fujimi_trac
 
 $ cd nginx
 $ docker build . -t fujimi_nginx

@@ -27,6 +27,14 @@ fujimi_fuel-todo:
     - ./fuel-todo:/usr/src/fuel-todo
     - ./fuel-todo/php-fpm.d:/usr/local/etc/php-fpm.d
 
+fujimi_trac:
+  container_name: "fujimi_trac"
+  image: fujimi_trac
+  restart: always
+  volumes:
+    - ./trac/project:/usr/src/trac-project
+  command: tracd /usr/src/trac-project
+
 fujimi_nginx:
   container_name: "fujimi_nginx"
   image: fujimi_nginx
@@ -36,6 +44,7 @@ fujimi_nginx:
     # - "443:443"
   links:
     - fujimi_otherbu_dev:otherbu_dev
+    - fujimi_trac:trac
   volumes:
     - ./nginx/log:/var/log/nginx
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
