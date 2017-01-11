@@ -29,6 +29,7 @@ $ git clone https://github.com/fujimisakari/trac
 $ mkdir mysql/log
 $ mkdir -p nginx/log/otherbu
 $ mkdir -p nginx/log/fuel-todo
+$ mkdir -p nginx/log/trac
 ```
 
 
