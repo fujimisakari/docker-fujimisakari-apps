@@ -5,9 +5,9 @@ fujimi_otherbu_prod:
   env_file: ./otherbu/.env.production
   working_dir: "/usr/src/otherbu_prod"
   volumes:
+    - /var/run/otherbu
     - ./otherbu:/usr/src/otherbu_prod
-    - /var/run
-  command: uwsgi --ini scripts/prod_uwsgi.ini
+  command: uwsgi --ini scripts/uwsgi_prod.ini
 
 fujimi_otherbu_staging:
   container_name: "fujimi_otherbu_staging"
@@ -16,9 +16,30 @@ fujimi_otherbu_staging:
   env_file: ./otherbu/.env.staging
   working_dir: "/usr/src/otherbu_staging"
   volumes:
+    - /var/run/otherbu
     - ./otherbu:/usr/src/otherbu_staging
-    - /var/run
-  command: uwsgi --ini scripts/staging_uwsgi.ini
+  command: uwsgi --ini scripts/uwsgi_staging.ini
+
+fujimi_todo_prod:
+  container_name: "fujimi_todo_prod"
+  image: fujimi_todo
+  restart: always
+  env_file: ./todo/.env.production
+  working_dir: "/usr/src/todo_prod"
+  volumes:
+    - /var/run/todo
+    - ./todo:/usr/src/todo_prod
+  command: uwsgi --ini scripts/uwsgi_prod.ini
+
+fujimi_todo_ws_prod:
+  container_name: "fujimi_todo_ws_prod"
+  image: fujimi_todo
+  restart: always
+  env_file: ./todo/.env.production
+  working_dir: "/usr/src/todo_prod"
+  volumes:
+    - ./todo:/usr/src/todo_dev
+  command: ./application/server.py
 
 fujimi_fuel-todo:
   container_name: "fujimi_fuel-todo"
@@ -48,6 +69,8 @@ fujimi_nginx:
   links:
     - fujimi_otherbu_prod:otherbu_prod
     - fujimi_otherbu_staging:otherbu_staging
+    - fujimi_todo_prod:todo_prod
+    - fujimi_todo_ws_prod:todo_ws_prod
   volumes:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/vhosts:/etc/nginx/vhosts

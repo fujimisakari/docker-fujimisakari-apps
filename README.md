@@ -19,6 +19,9 @@ $ cd docker-fujimisakari-apps
 # otherbu
 $ git clone https://github.com/fujimisakari/otherbu
 
+# todo
+$ git clone https://github.com/fujimisakari/todo-server todo
+
 # fuel-todo
 $ git clone https://github.com/fujimisakari/fuel-todo
 $ ./fuel-todo/composer.phar install
@@ -28,6 +31,7 @@ $ git clone https://github.com/fujimisakari/trac
 
 $ mkdir mysql/log
 $ mkdir -p nginx/log/otherbu
+$ mkdir -p nginx/log/todo
 $ mkdir -p nginx/log/fuel-todo
 $ mkdir -p nginx/log/trac
 ```
@@ -38,6 +42,9 @@ $ mkdir -p nginx/log/trac
 ```sh
 $ cd otherbu
 $ docker build . -t fujimi_otherbu
+
+$ cd todo
+$ docker build . -t fujimi_todo
 
 $ cd fuel-todo
 $ docker build . -t fujimi_fuel-todo
@@ -60,6 +67,9 @@ $ ./docker-compose.sh dev up
 
 # otherbu
 $ docker exec -it fujimi_otherbu_dev ./env/otherbu_init.sh develop
+
+# todo
+$ docker exec -it fujimi_todo_dev ./env/todo_init.sh develop
 
 # fuel-todo
 $ docker exec -it fujimi_fuel-todo ./init.sh

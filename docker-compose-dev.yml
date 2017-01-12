@@ -9,9 +9,38 @@ fujimi_otherbu_dev:
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - /var/run
+    - /var/run/otherbu
     - ./otherbu:/usr/src/otherbu_dev
-  command: uwsgi --ini scripts/dev_uwsgi.ini
+  command: uwsgi --ini scripts/uwsgi_dev.ini
+
+fujimi_todo_dev:
+  container_name: "fujimi_todo_dev"
+  image: fujimi_todo
+  restart: always
+  env_file: ./todo/.env.develop
+  working_dir: "/usr/src/todo_dev"
+  links:
+    - fujimi_mysql:db
+    - fujimi_redis:redis
+    - fujimi_memcached:memcached
+  volumes:
+    - /var/run/todo
+    - ./todo:/usr/src/todo_dev
+  command: uwsgi --ini scripts/uwsgi_dev.ini
+
+fujimi_todo_ws_dev:
+  container_name: "fujimi_todo_ws_dev"
+  image: fujimi_todo
+  restart: always
+  env_file: ./todo/.env.develop
+  working_dir: "/usr/src/todo_dev"
+  links:
+    - fujimi_mysql:db
+    - fujimi_redis:redis
+    - fujimi_memcached:memcached
+  volumes:
+    - ./todo:/usr/src/todo_dev
+  command: ./application/server.py
 
 fujimi_fuel-todo:
   container_name: "fujimi_fuel-todo"
@@ -44,6 +73,9 @@ fujimi_nginx:
     # - "443:443"
   links:
     - fujimi_otherbu_dev:otherbu_dev
+    - fujimi_todo_dev:todo_dev
+    - fujimi_todo_ws_dev:todo_ws_prod
+    - fujimi_todo_ws_dev:todo_ws_dev
     - fujimi_trac:trac
   volumes:
     - ./nginx/log:/var/log/nginx
@@ -51,6 +83,7 @@ fujimi_nginx:
     - ./nginx/vhosts:/etc/nginx/vhosts
   volumes_from:
     - fujimi_otherbu_dev
+    - fujimi_todo_dev
     - fujimi_fuel-todo
 
 fujimi_mysql:
