@@ -51,9 +51,6 @@ $ docker build . -t fujimi_trac
 
 $ cd nginx
 $ docker build . -t fujimi_nginx
-
-$ cd mysql
-$ docker build . -t fujimi_mysql
 ```
 
 
