@@ -30,10 +30,7 @@ $ ./fuel-todo/composer.phar install
 $ git clone https://github.com/fujimisakari/trac
 
 $ mkdir mysql/log
-$ mkdir -p nginx/log/otherbu
-$ mkdir -p nginx/log/todo
-$ mkdir -p nginx/log/fuel-todo
-$ mkdir -p nginx/log/trac
+$ mkdir -p nginx/log/otherbu nginx/log/todo nginx/log/fuel-todo nginx/log/trac
 ```
 
 
