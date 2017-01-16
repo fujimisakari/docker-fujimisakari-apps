@@ -74,8 +74,7 @@ fujimi_nginx:
   links:
     - fujimi_otherbu_dev:otherbu_dev
     - fujimi_todo_dev:todo_dev
-    - fujimi_todo_ws_dev:todo_ws_prod
-    - fujimi_todo_ws_dev:todo_ws_dev
+    - fujimi_todo_ws_dev:todo_ws
     - fujimi_trac:trac
   volumes:
     - ./nginx/log:/var/log/nginx

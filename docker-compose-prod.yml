@@ -70,7 +70,8 @@ fujimi_nginx:
     - fujimi_otherbu_prod:otherbu_prod
     - fujimi_otherbu_staging:otherbu_staging
     - fujimi_todo_prod:todo_prod
-    - fujimi_todo_ws_prod:todo_ws_prod
+    - fujimi_todo_ws_prod:todo_ws
+    - fujimi_trac:trac
   volumes:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/vhosts:/etc/nginx/vhosts
