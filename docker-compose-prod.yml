@@ -76,3 +76,5 @@ fujimi_nginx:
   volumes_from:
     - fujimi_otherbu_prod
     - fujimi_otherbu_staging
+    - fujimi_todo_prod
+    - fujimi_fuel-todo
