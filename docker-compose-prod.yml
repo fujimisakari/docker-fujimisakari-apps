@@ -25,7 +25,6 @@ fujimi_todo_prod:
   image: fujimi_todo
   restart: always
   env_file: ./todo/.env.production
-  working_dir: "/usr/src/todo_prod"
   volumes:
     - /var/run/todo
     - ./todo:/usr/src/todo
@@ -36,7 +35,6 @@ fujimi_todo_ws_prod:
   image: fujimi_todo
   restart: always
   env_file: ./todo/.env.production
-  working_dir: "/usr/src/todo_prod"
   volumes:
     - ./todo:/usr/src/todo
   command: ./application/server.py
