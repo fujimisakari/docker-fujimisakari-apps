@@ -52,7 +52,7 @@ fujimi_fuel-todo:
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - /var/run/php-fpm
+    - /var/run/fuel-todo
     - ./fuel-todo:/usr/src/fuel-todo
     - ./fuel-todo/php-fpm.d:/usr/local/etc/php-fpm.d
 

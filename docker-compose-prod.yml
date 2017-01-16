@@ -47,7 +47,7 @@ fujimi_fuel-todo:
   restart: always
   env_file: ./fuel-todo/.env
   volumes:
-    - /var/run/php-fpm
+    - /var/run/fuel-todo
     - ./fuel-todo:/usr/src/fuel-todo
     - ./fuel-todo/php-fpm.d:/usr/local/etc/php-fpm.d
 
