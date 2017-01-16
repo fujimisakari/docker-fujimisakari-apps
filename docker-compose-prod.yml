@@ -73,6 +73,7 @@ fujimi_nginx:
     - fujimi_todo_ws_prod:todo_ws
     - fujimi_trac:trac
   volumes:
+    - ./nginx/log:/var/log/nginx
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/vhosts:/etc/nginx/vhosts
   volumes_from:
