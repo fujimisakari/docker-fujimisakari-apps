@@ -38,7 +38,7 @@ fujimi_todo_ws_prod:
   env_file: ./todo/.env.production
   working_dir: "/usr/src/todo_prod"
   volumes:
-    - ./todo:/usr/src/todo_dev
+    - ./todo:/usr/src/todo_prod
   command: ./application/server.py
 
 fujimi_fuel-todo:
