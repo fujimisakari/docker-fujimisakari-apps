@@ -63,10 +63,10 @@ $ docker build . -t fujimi_mysql
 $ ./docker-compose.sh dev up
 
 # otherbu
-$ docker exec -it fujimi_otherbu_dev ./env/otherbu_init.sh develop
+$ docker exec -it fujimi_otherbu_dev ./env/init.sh develop
 
 # todo
-$ docker exec -it fujimi_todo_dev ./env/todo_init.sh develop
+$ docker exec -it fujimi_todo_dev ./env/init.sh develop
 
 # fuel-todo
 $ docker exec -it fujimi_fuel-todo ./init.sh
