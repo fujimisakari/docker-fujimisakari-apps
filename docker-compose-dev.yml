@@ -9,7 +9,7 @@ fujimi_otherbu_dev:
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - /var/run/otherbu
+    - /var/run/otherbu_dev
     - ./otherbu:/usr/src/otherbu_dev
   command: uwsgi --ini scripts/uwsgi_dev.ini
 
@@ -25,7 +25,7 @@ fujimi_todo_dev:
     - fujimi_memcached:memcached
   volumes:
     - /var/run/todo
-    - ./todo:/usr/src/todo_dev
+    - ./todo:/usr/src/todo
   command: uwsgi --ini scripts/uwsgi_dev.ini
 
 fujimi_todo_ws_dev:
@@ -39,7 +39,7 @@ fujimi_todo_ws_dev:
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - ./todo:/usr/src/todo_dev
+    - ./todo:/usr/src/todo
   command: ./application/server.py
 
 fujimi_fuel-todo:
