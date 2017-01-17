@@ -3,15 +3,14 @@ fujimi_otherbu_dev:
   image: fujimi_otherbu
   restart: always
   env_file: ./otherbu/.env.develop
-  working_dir: "/usr/src/otherbu_dev"
   links:
     - fujimi_mysql:db
     - fujimi_redis:redis
     - fujimi_memcached:memcached
   volumes:
-    - /var/run/otherbu_dev
-    - ./otherbu:/usr/src/otherbu_dev
-  command: uwsgi --ini scripts/uwsgi_dev.ini
+    - /var/run/otherbu
+    - ./otherbu:/usr/src/otherbu
+  command: uwsgi --ini scripts/uwsgi.ini
 
 fujimi_todo_dev:
   container_name: "fujimi_todo_dev"

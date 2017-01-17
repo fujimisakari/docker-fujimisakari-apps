@@ -3,22 +3,21 @@ fujimi_otherbu_prod:
   image: fujimi_otherbu
   restart: always
   env_file: ./otherbu/.env.production
-  working_dir: "/usr/src/otherbu_prod"
   volumes:
-    - /var/run/otherbu_prod
-    - ./otherbu:/usr/src/otherbu_prod
-  command: uwsgi --ini scripts/uwsgi_prod.ini
+    - /var/run/otherbu
+    - ./otherbu:/usr/src/otherbu
+  command: uwsgi --ini scripts/uwsgi.ini
 
-fujimi_otherbu_staging:
-  container_name: "fujimi_otherbu_staging"
-  image: fujimi_otherbu
-  restart: always
-  env_file: ./otherbu/.env.staging
-  working_dir: "/usr/src/otherbu_staging"
-  volumes:
-    - /var/run/otherbu_staging
-    - ./otherbu:/usr/src/otherbu_staging
-  command: uwsgi --ini scripts/uwsgi_staging.ini
+# fujimi_otherbu_staging:
+#   container_name: "fujimi_otherbu_staging"
+#   image: fujimi_otherbu
+#   restart: always
+#   env_file: ./otherbu/.env.staging
+#   working_dir: "/usr/src/otherbu_staging"
+#   volumes:
+#     - /var/run/otherbu_staging
+#     - ./otherbu:/usr/src/otherbu_staging
+#   command: uwsgi --ini scripts/uwsgi_staging.ini
 
 fujimi_todo_prod:
   container_name: "fujimi_todo_prod"
@@ -28,7 +27,7 @@ fujimi_todo_prod:
   volumes:
     - /var/run/todo
     - ./todo:/usr/src/todo
-  command: uwsgi --ini scripts/uwsgi_prod.ini
+  command: uwsgi --ini scripts/uwsgi.ini
 
 fujimi_todo_ws_prod:
   container_name: "fujimi_todo_ws_prod"
@@ -65,8 +64,8 @@ fujimi_nginx:
     - "80:80"
     # - "443:443"
   links:
-    - fujimi_otherbu_prod:otherbu_prod
-    - fujimi_otherbu_staging:otherbu_staging
+    - fujimi_otherbu_prod:otherbu
+    # - fujimi_otherbu_staging:otherbu_staging
     - fujimi_todo_ws_prod:todo_ws
     - fujimi_trac:trac
   volumes:
@@ -75,6 +74,6 @@ fujimi_nginx:
     - ./nginx/vhosts:/etc/nginx/vhosts
   volumes_from:
     - fujimi_otherbu_prod
-    - fujimi_otherbu_staging
+    # - fujimi_otherbu_staging
     - fujimi_todo_prod
     - fujimi_fuel-todo
