@@ -20,4 +20,6 @@ RUN apt-get update \
 RUN rm /etc/nginx/nginx.conf
 RUN rm /etc/nginx/conf.d/default.conf
 
+RUN mkdir /usr/src/blog
+
 CMD ["nginx", "-g", "daemon off;"]

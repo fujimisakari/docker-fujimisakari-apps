@@ -77,6 +77,7 @@ fujimi_nginx:
     - ./nginx/log:/var/log/nginx
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/vhosts:/etc/nginx/vhosts
+    - ./blog:/usr/src/blog
   volumes_from:
     - fujimi_otherbu
     - fujimi_todo
