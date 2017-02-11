@@ -24,7 +24,6 @@ $ git clone https://github.com/fujimisakari/todo-server todo
 
 # fuel-todo
 $ git clone https://github.com/fujimisakari/fuel-todo
-$ ./fuel-todo/composer.phar install
 
 # trac
 $ git clone https://github.com/fujimisakari/trac
@@ -66,6 +65,7 @@ $ docker exec -it fujimi_otherbu_dev ./env/init.sh develop
 $ docker exec -it fujimi_todo_dev ./env/init.sh develop
 
 # fuel-todo
+$ docker run -v $HOME/docker-fujimisakari-apps/fuel-todo:/usr/src/fuel-todo -it fujimi_fuel-todo /usr/src/fuel-todo/composer.phar install
 $ docker exec -it fujimi_fuel-todo ./init.sh
 
 let exit docker-compose
